@@ -50,6 +50,7 @@
     <Compile Include="Algoritmos\Mst.cs" />
     <Compile Include="Algoritmos\Scc.cs" />
     <Compile Include="Estruturas\Aresta.cs" />
+    <Compile Include="Estruturas\CoresEnum.cs" />
     <Compile Include="Estruturas\Grafo.cs" />
     <Compile Include="Estruturas\Vertice.cs" />
     <Compile Include="Factory.cs" />

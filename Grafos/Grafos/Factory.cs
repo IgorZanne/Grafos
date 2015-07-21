@@ -29,6 +29,7 @@ namespace Grafos
 
         public String Executar()
         {
+
             var result = algoritmo.Executar();
             return result;
         }

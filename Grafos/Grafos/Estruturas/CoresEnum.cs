@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Grafos.Estruturas
 {
-    public class Vertice
+    public enum CoresEnum
     {
-        public CoresEnum Cor {get; set;}
-        public Vertice Pai { get; set; }
-        public List<Vertice> Adj { get; set; }
+        Branco,
+        Cinza,
+        Preto
     }
 }

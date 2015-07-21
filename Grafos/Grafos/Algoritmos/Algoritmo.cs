@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grafos.Estruturas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Grafos.Algoritmos
 {
     public abstract class Algoritmo
     {
-        public abstract String Executar();
+        public abstract String Executar(Grafo grafo);
     }
 }
