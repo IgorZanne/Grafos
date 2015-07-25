@@ -17,7 +17,7 @@ namespace Grafos
                 var arquivoEntrada = args[1];
 
                 var algoritmo = new Factory(nomeAlgoritmo);
-                algoritmo.Executar();
+                algoritmo.Executar(arquivoEntrada);
             }
             catch (Exception e)
             {

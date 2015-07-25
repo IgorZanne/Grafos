@@ -54,6 +54,7 @@
     <Compile Include="Estruturas\Grafo.cs" />
     <Compile Include="Estruturas\Vertice.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="Helpers\GrafoHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

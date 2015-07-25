@@ -1,4 +1,5 @@
 ﻿using Grafos.Algoritmos;
+using Grafos.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,10 @@ namespace Grafos
             }
         }
 
-        public String Executar()
+        public String Executar(string arquivo)
         {
-
-            var result = algoritmo.Executar();
+            var grafo = GrafoHelper.Ler(arquivo);
+            var result = algoritmo.Executar(grafo);
             return result;
         }
     }
