@@ -22,7 +22,8 @@ namespace Grafos.Algoritmos
             {
                 Vertice U;
                 U = Q.First();
-                foreach (var Vertice in U.Adj)
+                Q.RemoveAt(0);
+                foreach (var Vertice in grafo.GetAdj(U.Id))
                 {
                     if (Vertice.Cor == CoresEnum.Branco)
                     {

@@ -13,6 +13,27 @@ namespace Grafos.Estruturas
         public List<Vertice> Vertices { get; set; }
         public List<Aresta> Arestas { get; set; }
 
+        public IEnumerable<Vertice> GetAdj(string vertice)
+        {
+            if (Direcionado)
+            {
+                return Arestas
+                    .Where(e => e.Origem.Id.Equals(vertice))
+                    .Select(e => e.Destino);
+            }
+            else
+            {
+                List<Vertice> retorno = new List<Vertice>();
+                retorno.AddRange(Arestas
+                    .Where(e => e.Origem.Id.Equals(vertice))
+                    .Select(e => e.Destino));
+                retorno.AddRange(Arestas
+                    .Where(e => e.Destino.Id.Equals(vertice))
+                    .Select(e => e.Origem));
+                return retorno.Distinct();
+            }
+        }
+
         public Grafo()
         {
             this.Direcionado = false;

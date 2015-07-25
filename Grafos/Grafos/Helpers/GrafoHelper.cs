@@ -23,8 +23,11 @@ namespace Grafos.Helpers
                     primeiraParte = false;
                     continue;
                 }
-                if (primeiraParte)
-                    retorno.Vertices.Add(new Vertice(linha));
+                if (primeiraParte) 
+                {
+                    var vertice = new Vertice(linha);
+                    retorno.Vertices.Add(vertice);
+                }
                 else
                 {
                     var carac = linha.Split(' ');
@@ -32,11 +35,15 @@ namespace Grafos.Helpers
                     if (tamanho <= 0 || tamanho > 3)
                         throw new Exception("Não foi possível identificar especificações da aresta no arquivo de entrada");
 
-                    if (tamanho == 2)
-                        retorno.Arestas.Add(new Aresta(new Vertice(carac[0]), new Vertice(carac[1])));
-
-                    if (tamanho == 3)
-                        retorno.Arestas.Add(new Aresta(new Vertice(carac[0]), new Vertice(carac[1]), Convert.ToInt16(carac[2])));
+                    if (tamanho >= 2) 
+                    {
+                        var origem = retorno.Vertices.Where(e => e.Id.Equals(carac[0])).First();
+                        var destino = retorno.Vertices.Where(e => e.Id.Equals(carac[1])).First();
+                        var aresta = new Aresta(origem, destino);
+                        if (tamanho > 2) 
+                            aresta.Peso = Convert.ToInt16(carac[2]);
+                        retorno.Arestas.Add(aresta);
+                    }
                 }
             }
 
