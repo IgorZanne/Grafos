@@ -28,7 +28,7 @@ namespace Grafos
             }
         }
 
-        public String Executar(string arquivo)
+        public IEnumerable<string> Executar(string arquivo)
         {
             var grafo = GrafoHelper.Ler(arquivo);
             var result = algoritmo.Executar(grafo);

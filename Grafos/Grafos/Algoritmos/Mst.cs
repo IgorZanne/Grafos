@@ -9,7 +9,7 @@ namespace Grafos.Algoritmos
 {
     public class Mst : Algoritmo
     {
-        public override string Executar(Grafo grafo)
+        public override IEnumerable<string> Executar(Grafo grafo)
         {
             throw new NotImplementedException();
         }

@@ -9,6 +9,6 @@ namespace Grafos.Algoritmos
 {
     public abstract class Algoritmo
     {
-        public abstract String Executar(Grafo grafo);
+        public abstract IEnumerable<string> Executar(Grafo grafo);
     }
 }

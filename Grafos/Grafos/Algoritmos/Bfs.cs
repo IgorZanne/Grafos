@@ -9,7 +9,7 @@ namespace Grafos.Algoritmos
 {
     public class Bfs : Algoritmo
     {
-        public override string Executar(Grafo grafo)
+        public override IEnumerable<string> Executar(Grafo grafo)
         {
             foreach (var vertice in grafo.Vertices)
             {
