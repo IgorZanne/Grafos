@@ -27,7 +27,8 @@ namespace Grafos
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine(e.Message);
+                Console.ReadLine();
             }
         }
 

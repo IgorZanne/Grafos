@@ -19,7 +19,10 @@ namespace Grafos.Helpers
             foreach (var linha in arquivo)
             {
                 if (linha.Equals("#"))
+                {
                     primeiraParte = false;
+                    continue;
+                }
                 if (primeiraParte)
                     retorno.Vertices.Add(new Vertice(linha));
                 else

@@ -15,7 +15,24 @@ namespace Grafos.Algoritmos
             {
                 vertice.Cor = CoresEnum.Branco;
                 vertice.Pai = null;
-                
+            }
+            List<Vertice> Q = new List<Vertice>();
+            Q.Add(grafo.Vertices.First());
+            while (Q.Any())
+            {
+                Vertice U;
+                U = Q.First();
+                foreach (var Vertice in U.Adj)
+                {
+                    if (Vertice.Cor == CoresEnum.Branco)
+                    {
+                        Vertice.Descoberta = U.Descoberta + 1;
+                        Vertice.Pai = U;
+                        Vertice.Cor = CoresEnum.Cinza;
+                        Q.Add(Vertice);
+                    }
+                }
+                U.Cor = CoresEnum.Preto;
             }
 
             throw new NotImplementedException();
