@@ -11,5 +11,7 @@ namespace Grafos.Estruturas
         public CoresEnum Cor {get; set;}
         public Vertice Pai { get; set; }
         public List<Vertice> Adj { get; set; }
+        public string Id { get; set; }
+        public int Descoberta { get; set; }
     }
 }
