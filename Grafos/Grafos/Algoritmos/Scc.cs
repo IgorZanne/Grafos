@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grafos.Estruturas;
+using Grafos.Helpers;
 
 namespace Grafos.Algoritmos
 {
@@ -11,7 +12,7 @@ namespace Grafos.Algoritmos
     {
         private Grafo grafoCorrente;
 
-        private void dfs(Grafo grafo)
+        private void dfs(Grafo grafo, bool decrescente)
         {
             foreach(var vertice in grafo.Vertices)
             {
@@ -19,7 +20,7 @@ namespace Grafos.Algoritmos
                 vertice.Pai = null;
             }
             int tempo = 0;
-            foreach(var vertice in grafo.Vertices)
+            foreach (var vertice in (decrescente ? grafo.Vertices : grafo.Vertices.OrderByDescending(e => e.Finalizacao).ToList()))
             {
                 if (vertice.Cor == CoresEnum.Branco)
                 {
@@ -28,36 +29,31 @@ namespace Grafos.Algoritmos
             }
         }
 
-        private void dfsVisit(Vertice U, int tempo)
+        private void dfsVisit(Vertice u, int tempo)
         {
             tempo = tempo++;
-            U.Cor = CoresEnum.Cinza;
-            U.Descoberta = tempo;
-            foreach(Vertice vertice in grafoCorrente.GetAdj(U.Id))
+            u.Cor = CoresEnum.Cinza;
+            u.Descoberta = tempo;
+            foreach(Vertice vertice in grafoCorrente.GetAdj(u.Id))
             {
                 if (vertice.Cor == CoresEnum.Branco)
                 {
-                    vertice.Pai = U;
+                    vertice.Pai = u;
                     dfsVisit(vertice, tempo);
                 }
             }
-            U.Cor = CoresEnum.Preto;
+            u.Cor = CoresEnum.Preto;
             tempo = tempo++;
-            //U.finalizacao = tempo;
+            u.Finalizacao = tempo;
         }
 
-        private void calculaTransposto(Grafo grafo)
-        {
-            Grafo grafoTransposto = new Grafo();
-            foreach(var vertice in grafo.Vertices)
-            {
-                
-            }
-        }
         public override IEnumerable<string> Executar(Grafo grafo)
         {
             grafoCorrente = grafo;
-            dfs(grafo);
+            dfs(grafo, false);
+            var tranposto = GrafoHelper.GetTransposto(grafo);
+            dfs(tranposto, true);
+
 
             throw new NotImplementedException();
         }
