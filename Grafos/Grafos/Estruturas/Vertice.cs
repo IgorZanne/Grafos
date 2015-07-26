@@ -19,5 +19,6 @@ namespace Grafos.Estruturas
         public Vertice Pai { get; set; }
         public string Id { get; set; }
         public int Descoberta { get; set; }
+        public int Finalizacao { get; set; }
     }
 }
