@@ -11,17 +11,14 @@ namespace Grafos.Algoritmos
     {
         public override IEnumerable<string> Executar(Grafo grafo)
         {
-            foreach (var vertice in grafo.Vertices)
-            {
-                vertice.Cor = CoresEnum.Branco;
-                vertice.Pai = null;
-            }
+            grafo.Direcionado = true;
+
+            var retorno = new List<string>();
             List<Vertice> Q = new List<Vertice>();
             Q.Add(grafo.Vertices.First());
             while (Q.Any())
             {
-                Vertice U;
-                U = Q.First();
+                Vertice U = Q.First();
                 Q.RemoveAt(0);
                 foreach (var Vertice in grafo.GetAdj(U.Id))
                 {
@@ -33,10 +30,11 @@ namespace Grafos.Algoritmos
                         Q.Add(Vertice);
                     }
                 }
+                retorno.Add(String.Format("{0} {1} {2}", grafo.Vertices.First().Id, U.Id, U.Descoberta));
                 U.Cor = CoresEnum.Preto;
             }
 
-            throw new NotImplementedException();
+            return retorno;
         }
     }
 }
