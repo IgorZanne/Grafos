@@ -9,6 +9,8 @@ namespace Grafos.Algoritmos
 {
     public class Scc : Algoritmo
     {
+        private Grafo grafoCorrente;
+
         private void dfs(Grafo grafo)
         {
             foreach(var vertice in grafo.Vertices)
@@ -31,7 +33,7 @@ namespace Grafos.Algoritmos
             tempo = tempo++;
             U.Cor = CoresEnum.Cinza;
             U.Descoberta = tempo;
-            foreach(Vertice vertice in U.Adj)
+            foreach(Vertice vertice in grafoCorrente.GetAdj(U.Id))
             {
                 if (vertice.Cor == CoresEnum.Branco)
                 {
@@ -54,6 +56,7 @@ namespace Grafos.Algoritmos
         }
         public override IEnumerable<string> Executar(Grafo grafo)
         {
+            grafoCorrente = grafo;
             dfs(grafo);
 
             throw new NotImplementedException();
