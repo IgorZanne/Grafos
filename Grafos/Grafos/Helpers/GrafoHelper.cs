@@ -49,5 +49,16 @@ namespace Grafos.Helpers
 
             return retorno;
         }
+
+        public static Grafo GetTransposto(Grafo grafo)
+        {
+            var novaListaAresta = new List<Aresta>();
+            foreach (var aresta in grafo.Arestas)
+            {
+                novaListaAresta.Add(new Aresta(aresta.Destino, aresta.Origem));
+            }
+            grafo.Arestas = novaListaAresta;
+            return grafo;
+        }
     }
 }
