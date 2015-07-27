@@ -30,6 +30,7 @@ namespace Grafos.Algoritmos
         {
             initialize(grafo);
             Vertice s = grafo.Vertices.First();
+            s.Descoberta = 0;
             int i;
             for (i = 1; i < grafo.Vertices.Count -1; i++ )
             {
