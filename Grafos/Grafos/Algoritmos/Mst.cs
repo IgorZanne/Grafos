@@ -8,7 +8,7 @@ using Grafos.Estruturas;
 namespace Grafos.Algoritmos
 {
     public class Mst : Algoritmo
-    {
+    {        
         public override IEnumerable<string> Executar(Grafo grafo)
         {
             throw new NotImplementedException();

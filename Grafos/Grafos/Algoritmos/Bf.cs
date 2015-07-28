@@ -28,6 +28,8 @@ namespace Grafos.Algoritmos
         }
         public override IEnumerable<string> Executar(Grafo grafo)
         {
+            var retorno = new List<string>();
+            grafo.Direcionado = true;
             initialize(grafo);
             Vertice s = grafo.Vertices.First();
             s.Descoberta = 0;
@@ -36,19 +38,23 @@ namespace Grafos.Algoritmos
             {
                 foreach(var aresta in grafo.Arestas)
                 {
-                    relax(aresta.Origem, aresta.Destino, aresta.Peso);
+                    relax(aresta.Origem, aresta.Destino, aresta.Peso);       
                 }
             }
 
-            foreach(var aresta in grafo.Arestas)
+            foreach (var ver in grafo.Vertices)
             {
-                if (aresta.Destino.Descoberta > aresta.Origem.Descoberta + aresta.Peso)
+                var saida = ver.Descoberta.ToString();
+                while (ver.Pai != null)
                 {
-                    //return = false;
+                    saida = ver.Pai.Id + " " + saida;
                 }
+
+                if (saida.StartsWith(grafo.Vertices.First().Id))
+                    retorno.Add(saida);
             }
-            //return = true;
-                throw new NotImplementedException();
+
+            return retorno;
         }
     }
 }
