@@ -23,12 +23,10 @@ namespace Grafos
                 {
                     Console.WriteLine(item);
                 }
-                Console.ReadLine();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                Console.ReadLine();
             }
         }
 
