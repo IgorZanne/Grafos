@@ -13,8 +13,8 @@ namespace Grafos.Algoritmos
         {
             foreach(var vertice in grafo.Vertices)
             {
-                vertice.Descoberta = Int32.MaxValue;
-                vertice.Pai = null;
+                vertice.Value.Descoberta = Int32.MaxValue;
+                vertice.Value.Pai = null;
             }
         }
 
@@ -31,8 +31,8 @@ namespace Grafos.Algoritmos
             var retorno = new List<string>();
             grafo.Direcionado = true;
             initialize(grafo);
-            Vertice s = grafo.Vertices.First();
-            s.Descoberta = 0;
+            var s = grafo.Vertices.First();
+            s.Value.Descoberta = 0;
             int i;
             for (i = 1; i < grafo.Vertices.Count -1; i++ )
             {
@@ -44,13 +44,13 @@ namespace Grafos.Algoritmos
 
             foreach (var ver in grafo.Vertices)
             {
-                var saida = ver.Descoberta.ToString();
-                while (ver.Pai != null)
+                var saida = ver.Value.Descoberta.ToString();
+                while (ver.Value.Pai != null)
                 {
-                    saida = ver.Pai.Id + " " + saida;
+                    saida = ver.Value.Pai.Id + " " + saida;
                 }
 
-                if (saida.StartsWith(grafo.Vertices.First().Id))
+                if (saida.StartsWith(grafo.Vertices.First().Value.Id))
                     retorno.Add(saida);
             }
 

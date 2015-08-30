@@ -13,8 +13,8 @@ namespace Grafos.Algoritmos
         {
             foreach (var vertice in grafo.Vertices)
             {
-                vertice.Descoberta = Int32.MaxValue;
-                vertice.Pai = null;
+                vertice.Value.Descoberta = Int32.MaxValue;
+                vertice.Value.Pai = null;
             }
         }
 
@@ -31,29 +31,29 @@ namespace Grafos.Algoritmos
             var retorno = new List<string>();
             grafo.Direcionado = true;
             initialize(grafo);
-            Vertice s = grafo.Vertices.First();
-            s.Descoberta = 0;
-            List<Vertice> q = new List<Vertice>();
+            var s = grafo.Vertices.First();
+            s.Value.Descoberta = 0;
+            Dictionary<string, Vertice> q = new Dictionary<string, Vertice>();
             List<Vertice> w = new List<Vertice>();
-            q.AddRange(grafo.Vertices);
+            q = grafo.Vertices;
             while (q.Any())
             {
-                q.OrderBy(e => e.Descoberta).ToList();
-                Vertice u = q.First();
-                q.RemoveAt(0);
-                
-                foreach(var vertice in grafo.GetAdj(u.Id))
+                q.OrderBy(e => e.Value.Descoberta).ToList();
+                var u = q.First();
+                q.Remove(q.Keys.First());
+
+                foreach (var vertice in grafo.GetAdj(u.Value.Id))
                 {
                     var aresta = grafo.Arestas
-                        .Where(e => e.Origem.Id.Equals(u.Id)
-                                 && e.Destino.Id.Equals(vertice.Id))
+                        .Where(e => e.Origem.Id.Equals(u.Value.Id)
+                                 && e.Destino.Id.Equals(vertice.Value.Id))
                         .FirstOrDefault();
-                    relax(u, vertice, aresta.Peso);
+                    relax(u.Value, vertice.Value, aresta.Peso);
                     
                 }
 
-                if (u.Descoberta != Int32.MaxValue)
-                    retorno.Add(String.Format("{0} {1} {2}", s.Id, u.Id, u.Descoberta));
+                if (u.Value.Descoberta != Int32.MaxValue)
+                    retorno.Add(String.Format("{0} {1} {2}", s.Value.Id, u.Value.Id, u.Value.Descoberta));
 
             }
             return retorno;
