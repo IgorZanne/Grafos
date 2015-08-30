@@ -26,7 +26,7 @@ namespace Grafos.Helpers
                 if (primeiraParte) 
                 {
                     var vertice = new Vertice(linha);
-                    retorno.Vertices.Add(vertice);
+                    retorno.Vertices.Add(linha, vertice);
                 }
                 else
                 {
@@ -37,8 +37,9 @@ namespace Grafos.Helpers
 
                     if (tamanho >= 2) 
                     {
-                        var origem = retorno.Vertices.Where(e => e.Id.Equals(carac[0])).First();
-                        var destino = retorno.Vertices.Where(e => e.Id.Equals(carac[1])).First();
+                        var origem = retorno.Vertices[carac[0]];
+                        var destino = retorno.Vertices[carac[1]];
+                        origem.Adjacentes.Add(destino.Id, destino);
                         var aresta = new Aresta(origem, destino);
                         if (tamanho > 2) 
                             aresta.Peso = Convert.ToInt16(carac[2]);

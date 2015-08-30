@@ -10,41 +10,26 @@ namespace Grafos.Estruturas
     public class Grafo
     {
         public bool Direcionado { get; set; }
-        public List<Vertice> Vertices { get; set; }
         public List<Aresta> Arestas { get; set; }
 
-        public IEnumerable<Vertice> GetAdj(string vertice)
+        public Dictionary<string, Vertice> Vertices { get; set; }
+
+        public Dictionary<string, Vertice> GetAdj(string vertice)
         {
-            if (Direcionado)
-            {
-                return Arestas
-                    .Where(e => e.Origem.Id.Equals(vertice))
-                    .Select(e => e.Destino);
-            }
-            else
-            {
-                List<Vertice> retorno = new List<Vertice>();
-                retorno.AddRange(Arestas
-                    .Where(e => e.Origem.Id.Equals(vertice))
-                    .Select(e => e.Destino));
-                retorno.AddRange(Arestas
-                    .Where(e => e.Destino.Id.Equals(vertice))
-                    .Select(e => e.Origem));
-                return retorno.Distinct();
-            }
+            return Vertices[vertice].Adjacentes;
         }
 
         public Grafo()
         {
-            this.Direcionado = false;
-            this.Vertices = new List<Vertice>();
+            this.Direcionado = true;
+            this.Vertices = new Dictionary<string, Vertice>();
             this.Arestas = new List<Aresta>();
         }
 
         public Grafo(bool direcionado)
         {
             this.Direcionado = direcionado;
-            this.Vertices = new List<Vertice>();
+            this.Vertices = new Dictionary<string, Vertice>();
             this.Arestas = new List<Aresta>();
         }
     }

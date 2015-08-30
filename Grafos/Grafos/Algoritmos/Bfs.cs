@@ -14,24 +14,25 @@ namespace Grafos.Algoritmos
             grafo.Direcionado = true;
 
             var retorno = new List<string>();
-            List<Vertice> Q = new List<Vertice>();
-            Q.Add(grafo.Vertices.First());
+            Dictionary<string, Vertice> Q = new Dictionary<string, Vertice>();
+            var primeiro = grafo.Vertices.First();
+            Q.Add(primeiro.Key, primeiro.Value);
             while (Q.Any())
             {
-                Vertice U = Q.First();
-                Q.RemoveAt(0);
-                foreach (var Vertice in grafo.GetAdj(U.Id))
+                var U = Q.First();
+                Q.Remove(Q.Keys.First());
+                foreach (var vertice in grafo.GetAdj(U.Key))
                 {
-                    if (Vertice.Cor == CoresEnum.Branco)
+                    if (vertice.Value.Cor == CoresEnum.Branco)
                     {
-                        Vertice.Descoberta = U.Descoberta + 1;
-                        Vertice.Pai = U;
-                        Vertice.Cor = CoresEnum.Cinza;
-                        Q.Add(Vertice);
+                        vertice.Value.Descoberta = U.Value.Descoberta + 1;
+                        vertice.Value.Pai = U.Value;
+                        vertice.Value.Cor = CoresEnum.Cinza;
+                        Q.Add(vertice.Key, vertice.Value);
                     }
                 }
-                retorno.Add(String.Format("{0} {1} {2}", grafo.Vertices.First().Id, U.Id, U.Descoberta));
-                U.Cor = CoresEnum.Preto;
+                retorno.Add(String.Format("{0} {1} {2}", grafo.Vertices.First().Key, U.Value.Id, U.Value.Descoberta));
+                U.Value.Cor = CoresEnum.Preto;
             }
 
             return retorno;

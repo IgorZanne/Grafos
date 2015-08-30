@@ -18,18 +18,14 @@ namespace Grafos.Algoritmos
         private void dfs(Grafo grafo, bool decrescente)
         {
             grafo.Direcionado = true;
-            foreach(var vertice in grafo.Vertices)
-            {
-                vertice.Cor = CoresEnum.Branco;
-                vertice.Pai = null;
-            }
+
             tempo = 0;
-            foreach (var vertice in (!decrescente ? grafo.Vertices : grafo.Vertices.OrderByDescending(e => e.Finalizacao).ToList()))
+            foreach (var vertice in (!decrescente ? grafo.Vertices.ToList() : grafo.Vertices.OrderByDescending(e => e.Value.Finalizacao).ToList()))
             {
-                if (vertice.Cor == CoresEnum.Branco)
+                if (vertice.Value.Cor == CoresEnum.Branco)
                 {
                     componente = string.Empty;
-                    dfsVisit(vertice);
+                    dfsVisit(vertice.Value);
                     if (decrescente)
                         retorno.Add(componente);
                 }
@@ -42,12 +38,12 @@ namespace Grafos.Algoritmos
             tempo++;
             u.Cor = CoresEnum.Cinza;
             u.Descoberta = tempo;
-            foreach(Vertice vertice in grafoCorrente.GetAdj(u.Id))
+            foreach(var vertice in grafoCorrente.GetAdj(u.Id))
             {
-                if (vertice.Cor == CoresEnum.Branco)
+                if (vertice.Value.Cor == CoresEnum.Branco)
                 {
-                    vertice.Pai = u;
-                    dfsVisit(vertice);
+                    vertice.Value.Pai = u;
+                    dfsVisit(vertice.Value);
                 }
             }
             u.Cor = CoresEnum.Preto;
