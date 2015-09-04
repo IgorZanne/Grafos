@@ -9,6 +9,7 @@ namespace Grafos.Algoritmos
 {
     public class Bf : Algoritmo
     {
+        private Grafo _grafo;
         private void initialize(Grafo grafo)
         {
             foreach(var vertice in grafo.Vertices)
@@ -16,16 +17,27 @@ namespace Grafos.Algoritmos
                 vertice.Value.Descoberta = Int32.MaxValue;
                 vertice.Value.Pai = null;
             }
+            _grafo = grafo;
         }
 
-        private void relax(Vertice u, Vertice v, int w)
+        //private void relax(Vertice u, Vertice v, int w)
+        //{
+        //    if (v.Descoberta > (u.Descoberta+w))
+        //    {
+        //        v.Descoberta = u.Descoberta + w;
+        //        v.Pai = u;
+        //    }
+        //}
+
+        private void relax(string u, string v, int w)
         {
-            if (v.Descoberta > (u.Descoberta+w))
+            if (_grafo.Vertices[v].Descoberta > (_grafo.Vertices[u].Descoberta + w))
             {
-                v.Descoberta = u.Descoberta + w;
-                v.Pai = u;
+                _grafo.Vertices[v].Descoberta = _grafo.Vertices[u].Descoberta + w;
+                _grafo.Vertices[v].Pai = _grafo.Vertices[u];
             }
         }
+
         public override IEnumerable<string> Executar(Grafo grafo)
         {
             var retorno = new List<string>();

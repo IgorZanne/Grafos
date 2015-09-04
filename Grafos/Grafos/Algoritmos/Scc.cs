@@ -17,24 +17,27 @@ namespace Grafos.Algoritmos
 
         private void dfs(Grafo grafo, bool decrescente)
         {
-            grafo.Direcionado = true;
-
+            foreach (var vertice in grafo.Vertices)
+            {
+                vertice.Value.Cor = CoresEnum.Branco;
+                vertice.Value.Pai = null;
+            }
             tempo = 0;
-            foreach (var vertice in (!decrescente ? grafo.Vertices.ToList() : grafo.Vertices.OrderByDescending(e => e.Value.Finalizacao).ToList()))
+            foreach (var vertice in (!decrescente ? grafo.Vertices : grafo.Vertices.OrderByDescending(e => e.Value.Finalizacao).AsEnumerable()))
             {
                 if (vertice.Value.Cor == CoresEnum.Branco)
                 {
                     componente = string.Empty;
                     dfsVisit(vertice.Value);
                     if (decrescente)
-                        retorno.Add(componente);
+                        retorno.Add(componente.Trim());
                 }
             }
         }
 
         private void dfsVisit(Vertice u)
         {
-            componente = componente + " " + u.Id;
+            componente += " " + u.Id;
             tempo++;
             u.Cor = CoresEnum.Cinza;
             u.Descoberta = tempo;

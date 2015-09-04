@@ -45,8 +45,8 @@ namespace Grafos.Algoritmos
                 foreach (var vertice in grafo.GetAdj(u.Value.Id))
                 {
                     var aresta = grafo.Arestas
-                        .Where(e => e.Origem.Id.Equals(u.Value.Id)
-                                 && e.Destino.Id.Equals(vertice.Value.Id))
+                        .Where(e => e.Origem.Equals(u.Key)
+                                 && e.Destino.Equals(vertice.Key))
                         .FirstOrDefault();
                     relax(u.Value, vertice.Value, aresta.Peso);
                     
