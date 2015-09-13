@@ -20,15 +20,6 @@ namespace Grafos.Algoritmos
             _grafo = grafo;
         }
 
-        //private void relax(Vertice u, Vertice v, int w)
-        //{
-        //    if (v.Descoberta > (u.Descoberta+w))
-        //    {
-        //        v.Descoberta = u.Descoberta + w;
-        //        v.Pai = u;
-        //    }
-        //}
-
         private void relax(string u, string v, int w)
         {
             if (_grafo.Vertices[v].Descoberta > (_grafo.Vertices[u].Descoberta + w))

@@ -40,7 +40,6 @@ namespace Grafos.Helpers
                         var origem = retorno.Vertices[carac[0]];
                         var destino = retorno.Vertices[carac[1]];
                         origem.Adjacentes.Add(destino.Id, destino);
-                        //var aresta = new Aresta(origem, destino);
                         var aresta = new Aresta(carac[0], carac[1]);
                         if (tamanho > 2) 
                             aresta.Peso = Convert.ToInt16(carac[2]);
@@ -59,8 +58,10 @@ namespace Grafos.Helpers
             {
                 if (grafo.Vertices[aresta.Origem].Adjacentes.ContainsKey(aresta.Destino))
                     grafo.Vertices[aresta.Origem].Adjacentes.Remove(aresta.Destino);
-                if (!grafo.Vertices[aresta.Destino].Adjacentes.ContainsKey(aresta.Origem))
-                    grafo.Vertices[aresta.Destino].Adjacentes.Add(aresta.Origem, grafo.Vertices[aresta.Origem]);
+                if (grafo.Vertices[aresta.Destino].Adjacentes.ContainsKey(aresta.Origem))
+                    grafo.Vertices[aresta.Destino].Adjacentes.Remove(aresta.Origem);
+                grafo.Vertices[aresta.Destino].Adjacentes.Add(aresta.Origem, grafo.Vertices[aresta.Origem]);
+
                 novaListaAresta.Add(new Aresta(aresta.Destino, aresta.Origem));
             }
             grafo.Arestas = novaListaAresta;
